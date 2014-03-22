@@ -59,11 +59,16 @@ class TimersController < UIViewController
       :sections => [{
         :title => "When did",
         :key   => :primary_values,
-        :rows => [{
+        :rows  => [{
           :key                 => :name,
           :placeholder         => "I learn to drive?",
           :type                => :string,
           :auto_capitalization => :none
+        }, {
+          :key    => :start_time,
+          :value  => NSDate.alloc.init.timeIntervalSince1970.to_i,
+          :type   => :date,
+          :picker_mode => :date_time
         }]
       }, {
         :rows => [{
@@ -77,12 +82,15 @@ class TimersController < UIViewController
   def newTimer
     newTimerController = Formotion::FormableController.alloc.initWithForm(newTimerForm)
     newTimerController.form.on_submit do |form|
-      name = form.render[:name]
+      formValues = form.render
+      name = formValues[:name]
+      happenedAt = Time.at(formValues[:start_time])
       if name && name != ""
-        Timer.create(:name => name)
+        Timer.create(:name => name, :happenedAt => happenedAt)
         @timers = Timer.all if cdq.save
         refreshTable
       end
+
       popView
     end
     self.navigationController.pushViewController(newTimerController, animated: true)
