@@ -16,28 +16,7 @@ class TimersController < UIViewController
   end
 
   def timers
-    @timers ||= [
-      {
-        :description => "become a dad?",
-        :happened_at => Time.mktime("2014-08-12")
-      },
-      {
-        :description => "quit smoking?",
-        :happened_at => Time.mktime("2014-01-02")
-      },
-      {
-        :description => "become a programmer?",
-        :happened_at => Time.mktime("2010-12-06")
-      },
-      {
-        :description => "get married?",
-        :happened_at => Time.mktime("2007-08-02")
-      },
-      {
-        :description => "start my first business?",
-        :happened_at => Time.mktime("1996-04-15")
-      }
-    ]
+    @timers ||= Timer.all
   end
 
   def tableView(tableView, cellForRowAtIndexPath: indexPath)
@@ -47,20 +26,20 @@ class TimersController < UIViewController
       UITableViewCell.alloc.initWithStyle(UITableViewCellStyleDefault, reuseIdentifier:@reuseIdentifier)
     end
 
-    cell.textLabel.text = timers[indexPath.row][:description]
+    cell.textLabel.text = timers[indexPath.row].name
 
     cell
   end
 
   def tableView(tableView, numberOfRowsInSection: section)
-    timers.count
+    Timer.count
   end
 
   def tableView(tableView, didSelectRowAtIndexPath:indexPath)
     tableView.deselectRowAtIndexPath(indexPath, animated: true)
 
     alert = UIAlertView.alloc.init
-    alert.message = "#{timers[indexPath.row][:description]} tapped!"
+    alert.message = "#{timers[indexPath.row].name} tapped!"
     alert.addButtonWithTitle "OK"
     alert.show
   end
@@ -91,7 +70,8 @@ class TimersController < UIViewController
       name = form.render[:name]
       if name && name != ""
         Timer.create(:name => name)
-        cdq.save
+        @timers = Timer.all if cdq.save
+        table.reloadData
       end
       popView
     end
