@@ -86,6 +86,7 @@ class TimersController < UIViewController
       popView
     end
     self.navigationController.pushViewController(newTimerController, animated: true)
+    newTimerController
   end
 
   def popView

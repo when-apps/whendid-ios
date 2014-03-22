@@ -9,6 +9,7 @@ rescue LoadError
 end
 
 require "guard/motion"
+require "motion-calabash"
 
 Motion::Project::App.setup do |app|
   # Use `rake config' to see complete project settings.

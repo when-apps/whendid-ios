@@ -1,4 +1,4 @@
-describe "Application 'whendidi'" do
+describe "Application 'When did'" do
   before do
     @app = UIApplication.sharedApplication
   end

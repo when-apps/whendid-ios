@@ -6,4 +6,5 @@ gem "rake"
 
 group :development do
   gem "guard-motion"
+  gem "motion-calabash"
 end
