@@ -1,5 +1,8 @@
 source "https://rubygems.org"
 
-gem "rake"
 gem "formotion"
-# Add your dependencies here:
+gem "rake"
+
+group :development do
+  gem "guard-motion"
+end
