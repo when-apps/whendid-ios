@@ -17,3 +17,5 @@ nbproject
 .dat*.*
 
 .bundle/install.log
+
+.irb-history
