@@ -9,6 +9,13 @@ class TimersController < UIViewController
 
     right_button = UIBarButtonItem.alloc.initWithTitle("New", style: UIBarButtonItemStyleBordered, target:self, action:"newTimer")
     self.navigationItem.rightBarButtonItem = right_button
+
+    @timer = NSTimer.scheduledTimerWithTimeInterval(1,
+      target: self,
+      selector: "refreshTable",
+      userInfo: nil,
+      repeats:  true
+    )
   end
 
   def table
@@ -23,10 +30,13 @@ class TimersController < UIViewController
     @reuseIdentifier ||= "CELL_IDENTIFIER"
 
     cell = tableView.dequeueReusableCellWithIdentifier(@reuseIdentifier) || begin
-      UITableViewCell.alloc.initWithStyle(UITableViewCellStyleDefault, reuseIdentifier:@reuseIdentifier)
+      cell = TimerViewCell.alloc.initWithStyle(UITableViewCellStyleDefault, reuseIdentifier:@reuseIdentifier)
+      cell.createLabels
+      cell
     end
 
-    cell.textLabel.text = timers[indexPath.row].name
+    cell.primaryLabel.text = timers[indexPath.row].name
+    cell.secondaryLabel.text = "#{(Time.now - timers[indexPath.row].happenedAt).to_i} seconds ago"
 
     cell
   end
@@ -71,7 +81,7 @@ class TimersController < UIViewController
       if name && name != ""
         Timer.create(:name => name)
         @timers = Timer.all if cdq.save
-        table.reloadData
+        refreshTable
       end
       popView
     end
@@ -80,5 +90,9 @@ class TimersController < UIViewController
 
   def popView
     self.navigationController.popViewControllerAnimated(true)
+  end
+
+  def refreshTable
+    table.reloadData
   end
 end
