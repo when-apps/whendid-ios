@@ -1,5 +1,8 @@
 class AppDelegate
+  include CDQ
+
   def application(application, didFinishLaunchingWithOptions:launchOptions)
+    cdq.setup
     window.makeKeyAndVisible
     window.rootViewController = navigation_controller
   end

@@ -1,5 +1,6 @@
 source "https://rubygems.org"
 
+gem "cdq"
 gem "formotion"
 gem "rake"
 
