@@ -4,7 +4,7 @@ class AppDelegate
   def application(application, didFinishLaunchingWithOptions:launchOptions)
     cdq.setup
     window.makeKeyAndVisible
-    window.rootViewController = navigation_controller
+    window.rootViewController = navigationController
   end
 
   def window
@@ -12,13 +12,13 @@ class AppDelegate
       UIWindow.alloc.initWithFrame(UIScreen.mainScreen.bounds)
   end
 
-  def timers_controller
-    @timers_controller ||= \
+  def timersController
+    @timersController ||= \
       TimersController.alloc.initWithNibName(nil, bundle: nil)
   end
 
-  def navigation_controller
-    @navigation_controller ||= \
-      UINavigationController.alloc.initWithRootViewController(timers_controller)
+  def navigationController
+    @navigationController ||= \
+      UINavigationController.alloc.initWithRootViewController(timersController)
   end
 end
