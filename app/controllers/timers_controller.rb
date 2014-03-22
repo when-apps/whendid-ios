@@ -2,10 +2,13 @@ class TimersController < UIViewController
   def viewDidLoad
     super
 
-    self.title = "When did I"
+    self.title = "When did"
     self.view.addSubview(table)
     table.dataSource = self
     table.delegate = self
+
+    right_button = UIBarButtonItem.alloc.initWithTitle("New", style: UIBarButtonItemStyleBordered, target:self, action:"newTimer")
+    self.navigationItem.rightBarButtonItem = right_button
   end
 
   def table
@@ -60,5 +63,42 @@ class TimersController < UIViewController
     alert.message = "#{timers[indexPath.row][:description]} tapped!"
     alert.addButtonWithTitle "OK"
     alert.show
+  end
+
+  def newTimerForm
+    @newTimerForm ||= Formotion::Form.new({
+      :sections => [{
+        :title => "When did",
+        :key   => :primary_values,
+        :rows => [{
+          :key                 => :name,
+          :placeholder         => "I learn to drive?",
+          :type                => :string,
+          :auto_capitalization => :none
+        }]
+      }, {
+        :rows => [{
+          :title => "Start",
+          :type  => :submit
+        }]
+      }]
+    })
+  end
+
+  def newTimer
+    newTimerController = Formotion::FormableController.alloc.initWithForm(newTimerForm)
+    newTimerController.form.on_submit do |form|
+      name = form.render[:name]
+      if name && name != ""
+        Timer.create(:name => name)
+        cdq.save
+      end
+      popView
+    end
+    self.navigationController.pushViewController(newTimerController, animated: true)
+  end
+
+  def popView
+    self.navigationController.popViewControllerAnimated(true)
   end
 end
