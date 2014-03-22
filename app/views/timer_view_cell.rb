@@ -6,11 +6,11 @@ class TimerViewCell < UITableViewCell
 
     @primaryLabel = UILabel.alloc.init
     @primaryLabel.textAlignment = UITextAlignmentLeft
-    @primaryLabel.font = UIFont.systemFontOfSize(14)
+    @primaryLabel.font = UIFont.systemFontOfSize(18)
 
     @secondaryLabel = UILabel.alloc.init
-    @secondaryLabel.textAlignment = UITextAlignmentLeft
-    @secondaryLabel.font = UIFont.systemFontOfSize(8)
+    @secondaryLabel.textAlignment = UITextAlignmentRight
+    @secondaryLabel.font = UIFont.systemFontOfSize(14)
 
     self.contentView.addSubview(@primaryLabel)
     self.contentView.addSubview(@secondaryLabel)
@@ -24,7 +24,7 @@ class TimerViewCell < UITableViewCell
     contentRect = self.contentView.bounds
     boundsX = contentRect.origin.x
 
-    @primaryLabel.frame = CGRectMake(boundsX+70, 5, 200, 25)
-    @secondaryLabel.frame = CGRectMake(boundsX+70, 30, 100, 15)
+    @primaryLabel.frame = CGRectMake(boundsX+10, 5, 200, 35)
+    @secondaryLabel.frame = CGRectMake(boundsX+10, 5, 300, 35)
   end
 end
