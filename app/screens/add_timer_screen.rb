@@ -20,10 +20,9 @@ class AddTimerScreen < PM::FormotionScreen
         :title => nil,
         :key   => :primary_values,
         :rows  => [{
-          :key                 => :name,
-          :placeholder         => "I learn to drive?",
-          :type                => :string,
-          :auto_capitalization => :none
+          :key         => :name,
+          :placeholder => "I learn to drive?",
+          :type        => :string
         }, {
           :key    => :start_time,
           :value  => NSDate.alloc.init.timeIntervalSince1970.to_i,
