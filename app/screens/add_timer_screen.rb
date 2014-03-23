@@ -29,9 +29,7 @@ class AddTimerScreen < PM::FormotionScreen
           :value  => NSDate.alloc.init.timeIntervalSince1970.to_i,
           :type   => :date,
           :picker_mode => :date_time
-        }]
-      }, {
-        :rows => [{
+        }, {
           :title => "Start",
           :type  => :submit
         }]

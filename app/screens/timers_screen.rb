@@ -11,8 +11,10 @@ class TimersScreen < PM::TableScreen
     [{
       :cells => Timer.sort_by(:happened_at, order: :descending).map do |timer|
         {
-          :title       => timer.name,
-          :subtitle => "#{(Time.now - timer.happened_at).to_i} seconds ago"
+          :title     => timer.name,
+          :subtitle  => "#{(Time.now - timer.happened_at).to_i} seconds ago",
+          :action    => :edit_timer,
+          :arguments => {:timer => timer}
         }
       end
     }]
@@ -20,6 +22,10 @@ class TimersScreen < PM::TableScreen
 
   def add_timer
     open AddTimerScreen
+  end
+
+  def edit_timer(args={})
+    open EditTimerScreen.new(args)
   end
 
   def view_will_appear(animated)
