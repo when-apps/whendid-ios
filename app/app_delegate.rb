@@ -1,24 +1,5 @@
-class AppDelegate
-  include CDQ
-
-  def application(application, didFinishLaunchingWithOptions:launchOptions)
-    cdq.setup
-    window.makeKeyAndVisible
-    window.rootViewController = navigationController
-  end
-
-  def window
-    @window ||= \
-      UIWindow.alloc.initWithFrame(UIScreen.mainScreen.bounds)
-  end
-
-  def timersController
-    @timersController ||= \
-      TimersController.alloc.initWithNibName(nil, bundle: nil)
-  end
-
-  def navigationController
-    @navigationController ||= \
-      UINavigationController.alloc.initWithRootViewController(timersController)
+class AppDelegate < PM::Delegate
+  def on_load(app, options)
+    open TimersScreen.new(nav_bar: true)
   end
 end
