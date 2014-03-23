@@ -1,5 +1,5 @@
 class AddTimerScreen < PM::FormotionScreen
-  title "When did"
+  title ""
 
   def on_submit(_form)
     formValues = _form.render
@@ -17,7 +17,7 @@ class AddTimerScreen < PM::FormotionScreen
   def table_data
     {
       :sections => [{
-        :title => "When did",
+        :title => nil,
         :key   => :primary_values,
         :rows  => [{
           :key                 => :name,
