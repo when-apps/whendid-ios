@@ -1,6 +1,6 @@
 schema "1395440557" do
   entity "Timer" do
     string   :name,        :optional => false
-    datetime :happenedAt,  :default => false
+    datetime :happened_at,  :default => false
   end
 end

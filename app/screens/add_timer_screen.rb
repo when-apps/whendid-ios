@@ -4,10 +4,10 @@ class AddTimerScreen < PM::FormotionScreen
   def on_submit(_form)
     formValues = _form.render
     name = formValues[:name]
-    happenedAt = Time.at(formValues[:start_time])
+    happened_at = Time.at(formValues[:start_time])
 
     if name && name != ""
-      Timer.create(:name => name, :happenedAt => happenedAt)
+      Timer.create(:name => name, :happened_at => happened_at)
       cdq.save
     end
 
