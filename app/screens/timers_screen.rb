@@ -9,7 +9,7 @@ class TimersScreen < PM::TableScreen
 
   def table_data
     [{
-      :cells => Timer.all.map do |timer|
+      :cells => Timer.sort_by(:happened_at, order: :descending).map do |timer|
         {
           :title       => timer.name,
           :subtitle => "#{(Time.now - timer.happened_at).to_i} seconds ago"
