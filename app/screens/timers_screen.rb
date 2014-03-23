@@ -9,7 +9,12 @@ class TimersScreen < PM::TableScreen
 
   def table_data
     [{
-      :cells => Timer.all.map {|t| {:title => t.name} }
+      :cells => Timer.all.map do |timer|
+        {
+          :title       => timer.name,
+          :subtitle => "#{(Time.now - timer.happenedAt).to_i} seconds ago"
+        }
+      end
     }]
   end
 
