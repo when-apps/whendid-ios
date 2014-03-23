@@ -15,6 +15,7 @@ Motion::Project::App.setup do |app|
   app.name = "When did"
   app.icons = ["Icon.png", "Icon@2x.png"]
   app.prerendered_icon = true
+  app.device_family = [:iphone]
 end
 
 task :"build:simulator" => :"schema:build"
