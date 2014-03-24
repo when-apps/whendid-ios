@@ -15,10 +15,18 @@ class EditTimerScreen < PM::FormotionScreen
 
   def on_submit(_form)
     formValues = _form.render
-    timer.name = formValues[:name]
-    cdq.save
+    name = formValues[:name]
 
-    close_screen
+    if name && name != ""
+      timer.name = name
+      cdq.save
+
+      close_screen
+    else
+      App.alert "Please enter a name", {
+        :cancel_button_title => "Ok"
+      }
+    end
   end
 
   def table_data
