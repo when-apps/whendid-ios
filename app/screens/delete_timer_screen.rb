@@ -11,7 +11,7 @@ class DeleteTimerScreen < PM::FormotionScreen
       cdq.save
       open_root_screen TimersScreen.new(nav_bar: true)
     else
-      App.alert "Value does not match, try again", {
+      App.alert "Name does not match, try again", {
         :cancel_button_title => "Ok"
       }
     end
@@ -20,7 +20,7 @@ class DeleteTimerScreen < PM::FormotionScreen
   def table_data
     {
       :sections => [{
-        :title => "Re-enter to confirm",
+        :title => "Re-enter name to confirm",
         :rows  => [{
           :key                 => :name,
           :placeholder         => timer.name,
