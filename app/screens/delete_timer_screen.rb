@@ -11,7 +11,9 @@ class DeleteTimerScreen < PM::FormotionScreen
       cdq.save
       open_root_screen TimersScreen.new(nav_bar: true)
     else
-      close_nav_screen
+      App.alert "Name does not match, try again", {
+        :cancel_button_title => "Ok"
+      }
     end
   end
 
