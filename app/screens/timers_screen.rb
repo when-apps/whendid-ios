@@ -12,7 +12,7 @@ class TimersScreen < PM::TableScreen
       :cells => Timer.sort_by(:happened_at, order: :descending).map do |timer|
         {
           :title     => timer.name,
-          :subtitle  => "#{humanize_time_in_seconds(Time.now - timer.happened_at)} ago",
+          :subtitle  => timer.distance_in_human_speak,
           :action    => :edit_timer,
           :arguments => {:timer => timer}
         }
@@ -39,26 +39,5 @@ class TimersScreen < PM::TableScreen
       userInfo: nil,
       repeats:  true
     )
-  end
-
-  def humanize_time_in_seconds(seconds)
-    values = [
-      [60, :seconds],
-      [60, :minutes],
-      [24, :hours],
-      [365, :days],
-      [100, :years]
-    ].map do |count, name|
-      if seconds > 0
-        seconds, n = seconds.divmod(count)
-        "#{n.to_i} #{name}"
-      end
-    end.compact.reverse
-
-    if values.size > 1
-      values[0..-2]
-    else
-      values
-    end.join(" ")
   end
 end
