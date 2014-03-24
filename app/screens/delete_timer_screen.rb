@@ -6,7 +6,7 @@ class DeleteTimerScreen < PM::FormotionScreen
   def on_submit(_form)
     formValues = _form.render
 
-    if formValues[:name] == timer.name
+    if formValues[:name].strip == timer.name.strip
       timer.destroy
       cdq.save
       open_root_screen TimersScreen.new(nav_bar: true)
