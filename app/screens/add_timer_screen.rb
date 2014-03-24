@@ -9,9 +9,13 @@ class AddTimerScreen < PM::FormotionScreen
     if name && name != ""
       Timer.create(:name => name, :happened_at => happened_at)
       cdq.save
-    end
 
-    close_screen
+      close_screen
+    else
+      App.alert "Please enter a name", {
+        :cancel_button_title => "Ok"
+      }
+    end
   end
 
   def table_data
