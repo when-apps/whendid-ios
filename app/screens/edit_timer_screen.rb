@@ -15,10 +15,12 @@ class EditTimerScreen < PM::FormotionScreen
 
   def on_submit(_form)
     formValues = _form.render
-    name = formValues[:name]
+    name  = formValues[:name]
+    image = formValues[:image].nsdata
 
     if name && name != ""
-      timer.name = name
+      timer.name  = name
+      timer.image = image
       cdq.save
 
       close_screen
@@ -38,6 +40,12 @@ class EditTimerScreen < PM::FormotionScreen
           :key   => :name,
           :type  => :string,
           :value => timer.name
+        }, {
+          :key       => :image,
+          :type      => :image,
+          :image     => "camera",
+          :deletable => true,
+          :value     => timer.image.uiimage
         }, {
           :title => "Save",
           :type  => :submit
