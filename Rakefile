@@ -18,6 +18,7 @@ Motion::Project::App.setup do |app|
   app.prerendered_icon = true
   app.device_family = [:iphone]
   app.provisioning_profile = "/Users/jonmagic/Library/MobileDevice/Provisioning Profiles/whenapps.mobileprovision"
+  app.version = "1.0.1"
 end
 
 task :"build:simulator" => :"schema:build"
